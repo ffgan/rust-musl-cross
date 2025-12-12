@@ -1,21 +1,22 @@
 on:
-  pull_request:
-  workflow_dispatch:
-    inputs:
-      no_cache:
-        description: Disable Docker cache, yes/no
-        default: "no"
-        required: false
-      toolchain:
-        description: Rust toolchain to install
-        default: "stable"
-        required: false
-      arch:
-        description: Architectures to build for
-        default: ""
-        required: false
-  schedule:
-    - cron: "0 0 1 */2 *"
+  # pull_request:
+  # workflow_dispatch:
+  #   inputs:
+  #     no_cache:
+  #       description: Disable Docker cache, yes/no
+  #       default: "no"
+  #       required: false
+  #     toolchain:
+  #       description: Rust toolchain to install
+  #       default: "stable"
+  #       required: false
+  #     arch:
+  #       description: Architectures to build for
+  #       default: ""
+  #       required: false
+  # schedule:
+  #   - cron: "0 0 1 */2 *"
+  push:
 
 name: Build
 
