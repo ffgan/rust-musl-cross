@@ -87,14 +87,14 @@ jobs:
             ) && github.event.head_commit.message) || ''
           }}
       ARCH_MATRIX: |
-        #   - arch: amd64
-        #     runner: ubuntu-latest
-        #   - arch: arm64
-        #     runner: ubuntu-24.04-arm
-        #   - arch: armv7
-        #     runner: ubuntu-24.04-arm
-        #     docker_arch: arm/v7
-        # TARGET_MATRIX: |
+        - arch: amd64
+          runner: ubuntu-latest
+          # - arch: arm64
+          #   runner: ubuntu-24.04-arm
+          # - arch: armv7
+          #   runner: ubuntu-24.04-arm
+          #   docker_arch: arm/v7
+      TARGET_MATRIX: |
         #   - IMAGE_TAG: aarch64-musl
         #     TARGET: aarch64-unknown-linux-musl
         #     RUST_MUSL_MAKE_CONFIG: config.mak.aarch64
