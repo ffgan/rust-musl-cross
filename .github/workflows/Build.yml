@@ -1,21 +1,22 @@
 on:
-  pull_request:
-  workflow_dispatch:
-    inputs:
-      no_cache:
-        description: Disable Docker cache, yes/no
-        default: "no"
-        required: false
-      toolchain:
-        description: Rust toolchain to install
-        default: "stable"
-        required: false
-      arch:
-        description: Architectures to build for
-        default: ""
-        required: false
-  schedule:
-    - cron: "0 0 1 */2 *"
+  # pull_request:
+  # workflow_dispatch:
+  #   inputs:
+  #     no_cache:
+  #       description: Disable Docker cache, yes/no
+  #       default: "no"
+  #       required: false
+  #     toolchain:
+  #       description: Rust toolchain to install
+  #       default: "stable"
+  #       required: false
+  #     arch:
+  #       description: Architectures to build for
+  #       default: ""
+  #       required: false
+  # schedule:
+  #   - cron: "0 0 1 */2 *"
+  push:
 
 name: Build
 
@@ -86,54 +87,54 @@ jobs:
             ) && github.event.head_commit.message) || ''
           }}
       ARCH_MATRIX: |
-        - arch: amd64
-          runner: ubuntu-latest
-        - arch: arm64
-          runner: ubuntu-24.04-arm
-        - arch: armv7
-          runner: ubuntu-24.04-arm
-          docker_arch: arm/v7
-      TARGET_MATRIX: |
-        - IMAGE_TAG: aarch64-musl
-          TARGET: aarch64-unknown-linux-musl
-          RUST_MUSL_MAKE_CONFIG: config.mak.aarch64
-          TOOLCHAIN: stable
-        - IMAGE_TAG: arm-musleabi
-          TARGET: arm-unknown-linux-musleabi
-          RUST_MUSL_MAKE_CONFIG: config.mak
-          TOOLCHAIN: stable
-        - IMAGE_TAG: arm-musleabihf
-          TARGET: arm-unknown-linux-musleabihf
-          RUST_MUSL_MAKE_CONFIG: config.mak
-          TOOLCHAIN: stable
-        - IMAGE_TAG: armv5te-musleabi
-          TARGET: armv5te-unknown-linux-musleabi
-          RUST_MUSL_MAKE_CONFIG: config.mak
-          TOOLCHAIN: stable
-        - IMAGE_TAG: armv7-musleabi
-          TARGET: armv7-unknown-linux-musleabi
-          RUST_MUSL_MAKE_CONFIG: config.mak
-          TOOLCHAIN: stable
-        - IMAGE_TAG: armv7-musleabihf
-          TARGET: armv7-unknown-linux-musleabihf
-          RUST_MUSL_MAKE_CONFIG: config.mak
-          TOOLCHAIN: stable
-        - IMAGE_TAG: i586-musl
-          TARGET: i586-unknown-linux-musl
-          RUST_MUSL_MAKE_CONFIG: config.mak
-          TOOLCHAIN: stable
-        - IMAGE_TAG: i686-musl
-          TARGET: i686-unknown-linux-musl
-          RUST_MUSL_MAKE_CONFIG: config.mak
-          TOOLCHAIN: stable
-        - IMAGE_TAG: loongarch64-musl
-          TARGET: loongarch64-unknown-linux-musl
-          RUST_MUSL_MAKE_CONFIG: config.mak.loongarch64
-          TOOLCHAIN: stable
-        - IMAGE_TAG: powerpc64le-musl
-          TARGET: powerpc64le-unknown-linux-musl
-          RUST_MUSL_MAKE_CONFIG: config.mak
-          TOOLCHAIN: stable
+        #   - arch: amd64
+        #     runner: ubuntu-latest
+        #   - arch: arm64
+        #     runner: ubuntu-24.04-arm
+        #   - arch: armv7
+        #     runner: ubuntu-24.04-arm
+        #     docker_arch: arm/v7
+        # TARGET_MATRIX: |
+        #   - IMAGE_TAG: aarch64-musl
+        #     TARGET: aarch64-unknown-linux-musl
+        #     RUST_MUSL_MAKE_CONFIG: config.mak.aarch64
+        #     TOOLCHAIN: stable
+        #   - IMAGE_TAG: arm-musleabi
+        #     TARGET: arm-unknown-linux-musleabi
+        #     RUST_MUSL_MAKE_CONFIG: config.mak
+        #     TOOLCHAIN: stable
+        #   - IMAGE_TAG: arm-musleabihf
+        #     TARGET: arm-unknown-linux-musleabihf
+        #     RUST_MUSL_MAKE_CONFIG: config.mak
+        #     TOOLCHAIN: stable
+        #   - IMAGE_TAG: armv5te-musleabi
+        #     TARGET: armv5te-unknown-linux-musleabi
+        #     RUST_MUSL_MAKE_CONFIG: config.mak
+        #     TOOLCHAIN: stable
+        #   - IMAGE_TAG: armv7-musleabi
+        #     TARGET: armv7-unknown-linux-musleabi
+        #     RUST_MUSL_MAKE_CONFIG: config.mak
+        #     TOOLCHAIN: stable
+        #   - IMAGE_TAG: armv7-musleabihf
+        #     TARGET: armv7-unknown-linux-musleabihf
+        #     RUST_MUSL_MAKE_CONFIG: config.mak
+        #     TOOLCHAIN: stable
+        #   - IMAGE_TAG: i586-musl
+        #     TARGET: i586-unknown-linux-musl
+        #     RUST_MUSL_MAKE_CONFIG: config.mak
+        #     TOOLCHAIN: stable
+        #   - IMAGE_TAG: i686-musl
+        #     TARGET: i686-unknown-linux-musl
+        #     RUST_MUSL_MAKE_CONFIG: config.mak
+        #     TOOLCHAIN: stable
+        #   - IMAGE_TAG: loongarch64-musl
+        #     TARGET: loongarch64-unknown-linux-musl
+        #     RUST_MUSL_MAKE_CONFIG: config.mak.loongarch64
+        #     TOOLCHAIN: stable
+        #   - IMAGE_TAG: powerpc64le-musl
+        #     TARGET: powerpc64le-unknown-linux-musl
+        #     RUST_MUSL_MAKE_CONFIG: config.mak
+        #     TOOLCHAIN: stable
         # - IMAGE_TAG: mips-musl
         #   TARGET: mips-unknown-linux-musl
         #   RUST_MUSL_MAKE_CONFIG: config.mak
@@ -150,19 +151,19 @@ jobs:
         #   TARGET: mipsel-unknown-linux-musl
         #   RUST_MUSL_MAKE_CONFIG: config.mak
         #   TOOLCHAIN: stable
-        - IMAGE_TAG: s390x-musl
-          TARGET: s390x-unknown-linux-musl
-          RUST_MUSL_MAKE_CONFIG: config.mak
-          TOOLCHAIN: nightly
+        # - IMAGE_TAG: s390x-musl
+        #   TARGET: s390x-unknown-linux-musl
+        #   RUST_MUSL_MAKE_CONFIG: config.mak
+        #   TOOLCHAIN: nightly
         - IMAGE_TAG: riscv64gc-musl
           TARGET: riscv64gc-unknown-linux-musl
           MUSL_TARGET: riscv64-unknown-linux-musl
-          RUST_MUSL_MAKE_CONFIG: config.mak
+          RUST_MUSL_MAKE_CONFIG: config.mak.riscv64
           TOOLCHAIN: stable
-        - IMAGE_TAG: x86_64-musl
-          TARGET: x86_64-unknown-linux-musl
-          RUST_MUSL_MAKE_CONFIG: config.mak
-          TOOLCHAIN: stable
+        # - IMAGE_TAG: x86_64-musl
+        #   TARGET: x86_64-unknown-linux-musl
+        #   RUST_MUSL_MAKE_CONFIG: config.mak
+        #   TOOLCHAIN: stable
 
   build:
     name: Build - ${{ matrix.os.arch }} - ${{ matrix.env.IMAGE_TAG }}
